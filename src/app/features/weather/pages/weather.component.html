@@ -1,15 +1,20 @@
-<form (submit)="search()" class="flex justify-center gap-4 mb-4">
-    <input type="text" placeholder="Enter location" name="location" [(ngModel)]="location" required />
-    <button type="submit">Search</button>
-</form>
-<div class="flex flex-col gap-2 items-center">
-    @if (searching) {
-    <p>Loading weather data...</p>
-    }
-    @else if (days.length === 0) {
-    <p>No weather data available. Please search for a location.</p>
-    }
-    @for (day of days; track $index) {
-    <app-day [day]="day"></app-day>
-    }
+<div class="flex justify-center">
+    <div class="w-xl">
+        <form (submit)="search()" class="flex justify-center gap-4 mb-4">
+            <input type="text" class="w-full" placeholder="Enter location" name="location" [(ngModel)]="location"
+                required />
+            <button type="submit">Search</button>
+        </form>
+        <div class="flex flex-col gap-2 items-center">
+            @if (searching) {
+            <p>Loading weather data...</p>
+            }
+            @else if (days.length === 0) {
+            <p>No weather data available. Please search for a location.</p>
+            }
+            @for (day of days; track $index) {
+            <app-day class="w-full" [day]="day"></app-day>
+            }
+        </div>
+    </div>
 </div>
