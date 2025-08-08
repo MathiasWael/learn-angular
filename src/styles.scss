@@ -2,7 +2,8 @@
 
 :root {
     --background-color: #3b4261;
-    --primary-color: #475281;
+    --secondary-background-color: #475281;
+    --primary-color: #5771df;
 }
 
 html,
@@ -18,7 +19,7 @@ body {
 }
 
 button {
-    background-color: #5771df;
+    background-color: var(--primary-color);
     padding: 0.5rem 1rem;
     font-weight: bold;
     border: none;
@@ -26,7 +27,7 @@ button {
     cursor: pointer;
 
     &:hover {
-        background-color: #475281;
+        background-color: var(--secondary-background-color);
     }
 }
 
