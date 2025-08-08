@@ -1,8 +1,11 @@
-<div class="day-component rounded-lg w-xl p-4 px-8 text-center">
-    <div class="grid grid-cols-9 gap-2 cursor-pointer" (click)="expanded = !expanded">
-        <div class="col-span-4 row-span-2 text-lg">
+<div class="day-component rounded-lg w-xl text-center">
+    <div class="grid grid-cols-10 gap-2 cursor-pointer" (click)="expanded = !expanded">
+        <div class="col-span-5 row-span-2">
             <div class="flex justify-between items-center w-full h-full">
-                {{ day().datetime | date:'EEEE, MMM d' }}
+                <div class="flex flex-col items-start">
+                    <span class="text-xl">{{ day().datetime | day }}</span>
+                    <span class="font-normal">{{ day().datetime | date:'MMMM d' }}</span>
+                </div>
                 <div class="big-icon">{{ day().icon | weatherIcon }}</div>
             </div>
         </div>
@@ -19,20 +22,24 @@
         </div>
     </div>
     @if (expanded) {
-    <div class="border-b my-4"></div>
-    <div class="grid grid-cols-5 gap-2">
-        @for (hour of day().hours; track $index) {
-        <div class="text-lg">{{ hour.datetime | hourTime }}</div>
-        <div class="text-xl">{{ hour.temp | number: '1.0-0' }}°</div>
-        <div class="text-3xl">{{ hour.icon | weatherIcon }}</div>
-        
-        <div>
-            <span class="icon">💧</span> {{ hour.humidity | number: '1.0-0' }}
+    <div>
+        <div class="border-b-2 mb-4"></div>
+        <div class="grid grid-cols-5 gap-2">
+            @for (hour of day().hours; track $index) {
+            @if ($index !== 0) {
+            <div class="col-span-5 border-b table-line-break"></div>
+            }
+            <div class="flex items-center justify-center">{{ hour.datetime | hourTime }}</div>
+            <div class="flex items-center justify-center">{{ hour.temp | number: '1.0-0' }}°</div>
+            <div class="text-3xl flex items-center justify-center">{{ hour.icon | weatherIcon }}</div>
+            <div class="flex items-center justify-center gap-1">
+                <span class="icon">💧</span> {{ hour.humidity | number: '1.0-0' }}
+            </div>
+            <div class="flex items-center justify-center gap-1">
+                <span class="icon">🌪️</span> {{ hour.windspeed | number: '1.0-0' }}
+            </div>
+            }
         </div>
-        <div>
-            <span class="icon">🌪️</span> {{ hour.windspeed | number: '1.0-0' }}
-        </div>
-        }
     </div>
     }
 </div>

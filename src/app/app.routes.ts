@@ -10,5 +10,9 @@ export const routes: Routes = [
     {
         path: 'weather',
         children: WEATHER_ROUTES
+    },
+    {
+        path: '**',
+        redirectTo: 'home'
     }
 ];

@@ -1,6 +1,10 @@
 .day-component {
-    background-color: #475281;
+    background-color: var(--primary-color);
     font-weight: bold;
+
+    >div {
+        padding: 1rem 2rem;
+    }
 }
 
 .icon {
@@ -8,6 +12,9 @@
 }
 
 .big-icon {
-    padding-top: 0.5rem;
     font-size: 2.5rem;
+}
+
+.table-line-break {
+    color: black;
 }
