@@ -1,0 +1,38 @@
+<div class="day-component rounded-lg w-xl p-4 px-8 text-center">
+    <div class="grid grid-cols-9 gap-2 cursor-pointer" (click)="expanded = !expanded">
+        <div class="col-span-4 row-span-2 text-lg">
+            <div class="flex justify-between items-center w-full h-full">
+                {{ day().datetime | date:'EEEE, MMM d' }}
+                <div class="big-icon">{{ day().icon | weatherIcon }}</div>
+            </div>
+        </div>
+        <div class="col-span-2 row-span-2 flex justify-end items-center text-xl">
+            {{ day().tempmax | number: '1.0-0' }}° / {{ day().tempmin | number: '1.0-0' }}°
+        </div>
+        <div class="col-span-2 flex justify-end items-center gap-1">
+            <span class="icon">💧</span> {{ day().humidity | number: '1.0-0' }}
+        </div>
+        <div class="flex justify-end icon items-center">{{ expanded ? '-' : '+' }}</div>
+
+        <div class="col-span-2 flex justify-end items-center gap-1">
+            <span class="icon">🌪️</span> {{ day().windspeed | number: '1.0-0' }}
+        </div>
+    </div>
+    @if (expanded) {
+    <div class="border-b my-4"></div>
+    <div class="grid grid-cols-5 gap-2">
+        @for (hour of day().hours; track $index) {
+        <div class="text-lg">{{ hour.datetime | hourTime }}</div>
+        <div class="text-xl">{{ hour.temp | number: '1.0-0' }}°</div>
+        <div class="text-3xl">{{ hour.icon | weatherIcon }}</div>
+        
+        <div>
+            <span class="icon">💧</span> {{ hour.humidity | number: '1.0-0' }}
+        </div>
+        <div>
+            <span class="icon">🌪️</span> {{ hour.windspeed | number: '1.0-0' }}
+        </div>
+        }
+    </div>
+    }
+</div>
