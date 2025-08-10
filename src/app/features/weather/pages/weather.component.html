@@ -1,19 +1,31 @@
 <div class="flex justify-center">
     <div class="w-xl">
-        <form (submit)="search()" class="flex justify-center gap-4 mb-4">
+        <form (ngSubmit)="search()" class="flex justify-center gap-4 mb-4">
             <input type="text" class="w-full" placeholder="Enter location" name="location" [(ngModel)]="location"
                 required />
-            <button type="submit">Search</button>
+            <button class="w-3xs" type="submit" [disabled]="searching">
+                {{ searching ? 'Searching...' : 'Search' }}
+            </button>
         </form>
+
+        @if (error) {
+        <div class="text-red-500 text-center mb-4 p-2 bg-red-100 rounded">
+            {{ error }}
+        </div>
+        }
+
         <div class="flex flex-col gap-2 items-center">
             @if (searching) {
-            <p>Loading weather data...</p>
+            <p class="loading-text">Loading weather data...</p>
             }
-            @else if (days.length === 0) {
+            @else if ((weather?.days?.length ?? 0) === 0 && !error) {
             <p>No weather data available. Please search for a location.</p>
             }
-            @for (day of days; track $index) {
+            @else {
+            <p>resolved address: {{ weather?.resolvedAddress }}, timezone: {{ weather?.timezone }}</p>
+            @for (day of weather?.days; track $index) {
             <app-day class="w-full" [day]="day"></app-day>
+            }
             }
         </div>
     </div>

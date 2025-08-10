@@ -1,0 +1,3 @@
+export const environment = {
+  weatherApiKey: 'put-your-real-api-key-here'
+};

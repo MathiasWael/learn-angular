@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { delay, map, Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 import { WEATHER_API_MOCK_DATA } from './weather-api-mock';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +10,17 @@ import { WEATHER_API_MOCK_DATA } from './weather-api-mock';
 export class WeatherService {
   httpClient = inject(HttpClient);
 
-  apiKey = '';
+  private readonly apiKey = environment.weatherApiKey;
   private readonly apiUrl = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
-  getDays(location: string): Observable<ApiDay[]> {
-    return of(WEATHER_API_MOCK_DATA).pipe(
-      map(response => response.days),
-      delay(500)
-    );
+  getWeather(location: string): Observable<WeatherApiResponse> {
+    if (this.apiKey === '') {
+      return of(WEATHER_API_MOCK_DATA).pipe(
+        delay(500)
+      );
+    }
 
-    //return this.httpClient.get<Day[]>(`${this.apiUrl}/${location}?unitGroup=metric&key=${this.apiKey}`);
+    return this.httpClient.get<WeatherApiResponse>(`${this.apiUrl}/${location}?unitGroup=metric&key=${this.apiKey}`);
   }
 }
 

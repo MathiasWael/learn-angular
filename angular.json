@@ -79,6 +79,17 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -91,6 +102,9 @@
             },
             "development": {
               "buildTarget": "learn-angular:build:development"
+            },
+            "local": {
+              "buildTarget": "learn-angular:build:local"
             }
           },
           "defaultConfiguration": "development"
