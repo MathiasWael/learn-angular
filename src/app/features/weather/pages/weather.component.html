@@ -22,7 +22,7 @@
             <p>No weather data available. Please search for a location.</p>
             }
             @else {
-            <p>resolved address: {{ weather?.resolvedAddress }}, timezone: {{ weather?.timezone }}</p>
+            <p>{{ weather?.resolvedAddress }} (timezone: {{ weather?.timezone }})</p>
             @for (day of weather?.days; track $index) {
             <app-day class="w-full" [day]="day"></app-day>
             }
