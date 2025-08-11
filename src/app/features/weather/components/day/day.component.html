@@ -1,5 +1,5 @@
 <div class="day-component rounded-lg w-full text-center">
-    <div class="grid grid-cols-10 gap-2 cursor-pointer" (click)="expanded = !expanded">
+    <div class="grid grid-cols-10 gap-2 cursor-pointer" (click)="expanded = !expanded" appHighlight>
         <div class="col-span-5 row-span-2">
             <div class="flex justify-between items-center w-full h-full">
                 <div class="flex flex-col items-start">
@@ -24,19 +24,21 @@
     @if (expanded) {
     <div>
         <div class="border-b-2 mb-4"></div>
-        <div class="grid grid-cols-5 gap-2">
+        <div class="grid grid-cols-1">
             @for (hour of day().hours; track $index) {
             @if ($index !== 0) {
-            <div class="col-span-5 border-b table-line-break"></div>
+            <div class="border-b table-line-break"></div>
             }
-            <div class="flex items-center justify-center">{{ hour.datetime | hourTime }}</div>
-            <div class="flex items-center justify-center">{{ hour.temp | number: '1.0-0' }}°</div>
-            <div class="text-3xl flex items-center justify-center">{{ hour.icon | weatherIcon }}</div>
-            <div class="flex items-center justify-center gap-1">
-                <span class="icon">💧</span> {{ hour.humidity | number: '1.0-0' }}
-            </div>
-            <div class="flex items-center justify-center gap-1">
-                <span class="icon">🌪️</span> {{ hour.windspeed | number: '1.0-0' }}
+            <div class="grid grid-cols-5 gap-2 py-1" appHighlight>
+                <div class="flex items-center justify-center">{{ hour.datetime | hourTime }}</div>
+                <div class="flex items-center justify-center">{{ hour.temp | number: '1.0-0' }}°</div>
+                <div class="text-3xl flex items-center justify-center">{{ hour.icon | weatherIcon }}</div>
+                <div class="flex items-center justify-center gap-1">
+                    <span class="icon">💧</span> {{ hour.humidity | number: '1.0-0' }}
+                </div>
+                <div class="flex items-center justify-center gap-1">
+                    <span class="icon">🌪️</span> {{ hour.windspeed | number: '1.0-0' }}
+                </div>
             </div>
             }
         </div>

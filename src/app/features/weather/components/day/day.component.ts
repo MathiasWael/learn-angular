@@ -4,10 +4,11 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { WeatherIconPipe } from "../../pipes/weather-icon.pipe";
 import { HourTimePipe } from "../../pipes/hour-time.pipe";
 import { DayPipe } from "../../pipes/day.pipe";
+import { HighlightDirective } from '../../../../common/directives/highlight.directive';
 
 @Component({
   selector: 'app-day',
-  imports: [DatePipe, WeatherIconPipe, HourTimePipe, DecimalPipe, DayPipe],
+  imports: [DatePipe, WeatherIconPipe, HourTimePipe, DecimalPipe, DayPipe, HighlightDirective],
   templateUrl: './day.component.html',
   styleUrl: './day.component.scss'
 })
